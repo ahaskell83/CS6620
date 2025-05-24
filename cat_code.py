@@ -1,9 +1,17 @@
 import datetime
-import math
+from dateutil.relativedelta import relativedelta
+import random
+import pandas as pd
+
 
 def helper_date_parser(date_string):
-    us_format = '%m/%d/%Y'
-    return datetime.datetime.strptime(date_string,us_format).date()
+    try:
+        us_format = '%m/%d/%Y'
+        return datetime.datetime.strptime(date_string,us_format).date()
+    except ValueError:
+        py_format = '%Y-%m-%d'
+        return datetime.datetime.strptime(date_string,py_format).date()
+
 
 class Cat:
     def __init__(self,name,dob,male=True,intact=True):
@@ -11,24 +19,100 @@ class Cat:
         self.male = male
         self.dob = dob
         date_dob = helper_date_parser(dob)
-        self.age_in_yrs = math.floor((abs(datetime.date.today()-date_dob).days)/365)
+        self.age_in_yrs = round(((abs(datetime.date.today()-date_dob).days)/365),1)
         self.intact = intact
     
     def get_name(self):
         return self.name
     
-class Clowder:
-    def __init__(self):
-        self.clowder = {}
+class Clowder():
+    clowder = {}
+
+    def __init__(self,name):
+        self.clowder_name = name
         
-    def cat_moves_in(self,cat_object):
-        self.clowder[cat_object.get_name()] = cat_object
+    def cat_moves_in(self,cat_object,arrival_date=datetime.date.today()):
+        self.clowder[cat_object.get_name()] = [cat_object, arrival_date]
     
-    def cat_family_moves_in(self,list_of_cat_objects):
-        pass
-    
+    def cat_family_moves_in(self,list_of_cat_objects,arrival_date=datetime.date.today()):
+        for cat in list_of_cat_objects:
+            self.cat_moves_in(cat,arrival_date)
+            
+    def adoption(self, name):
+        del self.clowder[name]
+
+    def update_move_in_date(self, cat_name, new_date):
+        self.clowder[cat_name][1] = helper_date_parser(new_date)
+        
     def get_clowder_names(self):
-        return self.clowder.keys()
+        return list(self.clowder.keys())
     
-    def _get_clowder_obj(self):
-        return self.clowder.values()
+    def get_move_in_dates(self):
+        return list(x[1] for x in list(self.clowder.values()))
+    
+    def _get_clowder_objs(self):
+        return list(self.clowder.values())
+    
+    def _get_clowder_summary(self):
+        clowder_df = pd.DataFrame(columns=['Name','Age','Male','Intact','Arrival_Date'])
+        for cat in self.clowder.keys():
+            row_list = [cat,self.clowder[cat][0].age_in_yrs,self.clowder[cat][0].male,self.clowder[cat][0].intact,self.clowder[cat][1]]
+            clowder_df.loc[len(clowder_df)] = row_list
+        return clowder_df
+        
+    def _check_for_breeding_criteria(self):
+        
+        gestation_days = (datetime.date.today() - relativedelta(days=65))
+   
+        df = self._get_clowder_summary()
+        potential_breeders = df[(df['Age'] > 0.99) & (df['Intact'] == True) & (df['Arrival_Date'] < gestation_days)]
+        genders = potential_breeders['Male'].nunique()
+        if genders > 1:
+            return potential_breeders
+        
+    def current_clowder_status(self,test_seed = False):
+        breeders = self._check_for_breeding_criteria()
+        
+        if breeders is not None:
+    
+            if test_seed:
+                random.seed(test_seed)
+                
+            num_moms = breeders['Male'].value_counts().get(False,0)
+  
+            dob = str(datetime.date.today())
+            
+            for i in range(num_moms):
+            
+                num_kittens = random.randint(1,9)
+
+                for j in range(num_kittens):
+                    kitten_name = 'mom_' + str(i) + '_kitten_' + str(j) + '_' + str(dob)
+                    self.clowder[kitten_name] = [Cat(kitten_name,dob,male=random.choice([True,False]),intact=True),dob]
+        
+        print(len(self.clowder))
+        print(self.get_clowder_names())
+
+                
+            
+'''clowder = Clowder('test')
+
+def cat_family():
+    names = ["Mom","Dad","Fluffy","Shaggy","Sleek","rando"]
+    dobs = ['1/1/2009', '1/1/2020', '1/1/2025', '1/1/2025', '1/1/2025','1/1/2009']
+    male = [False, True, True, True, False,True]
+    intact = [True,True, True, True, True,True]
+    cats = []
+    for i in range (6):
+        cats.append(Cat(names[i],dobs[i],male[i],intact[i]))
+    return cats
+
+cats = cat_family()
+
+clowder.cat_family_moves_in(cats)
+
+clowder.update_move_in_date('rando','1/1/2020')
+clowder.update_move_in_date('Mom','1/1/2020')
+
+clowder.current_clowder_status(test_seed = 42)
+'''
