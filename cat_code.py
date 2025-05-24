@@ -17,9 +17,11 @@ class Cat:
     def __init__(self,name,dob,male=True,intact=True):
         self.name = name
         self.male = male
-        self.dob = dob
-        date_dob = helper_date_parser(dob)
-        self.age_in_yrs = round(((abs(datetime.date.today()-date_dob).days)/365),1)
+        if type(dob) == str:
+            self.dob = helper_date_parser(dob)
+        else:
+            self.dob = dob
+        self.age_in_yrs = round(((abs(datetime.date.today()-self.dob).days)/365),1)
         self.intact = intact
     
     def get_name(self):
@@ -32,9 +34,13 @@ class Clowder():
         self.clowder_name = name
         
     def cat_moves_in(self,cat_object,arrival_date=datetime.date.today()):
+        if type(arrival_date) == str:
+            arrival_date = helper_date_parser(arrival_date)
         self.clowder[cat_object.get_name()] = [cat_object, arrival_date]
     
     def cat_family_moves_in(self,list_of_cat_objects,arrival_date=datetime.date.today()):
+        if type(arrival_date) == str:
+            arrival_date = helper_date_parser(arrival_date)
         for cat in list_of_cat_objects:
             self.cat_moves_in(cat,arrival_date)
             
@@ -42,7 +48,10 @@ class Clowder():
         del self.clowder[name]
 
     def update_move_in_date(self, cat_name, new_date):
-        self.clowder[cat_name][1] = helper_date_parser(new_date)
+
+        if type(new_date) == str:
+            new_date = helper_date_parser(new_date)
+        self.clowder[cat_name][1] =new_date
         
     def get_clowder_names(self):
         return list(self.clowder.keys())
@@ -80,7 +89,7 @@ class Clowder():
                 
             num_moms = breeders['Male'].value_counts().get(False,0)
   
-            dob = str(datetime.date.today())
+            dob = datetime.date.today()
             
             for i in range(num_moms):
             

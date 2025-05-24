@@ -30,6 +30,7 @@ def breeding_cats():
     cat_found_family = [Cat('Karen','1/1/2019',False,True),Cat('Kelsie','1/1/2020',False,True),Cat('George','1/1/2020',True,True)]
     return cat_found_family
 
+
 def test_cat_creation(cat):
     assert cat.name == "Big Tom"
     assert cat.age_in_yrs == 10
@@ -47,3 +48,19 @@ def test_add_family_with_arrival_date(clowder, breeding_cats):
     clowder.cat_family_moves_in(breeding_cats,arrival_date = '11/1/2024')
     assert len(clowder.clowder) == 9
 
+# with random seed = 42, num_kittens = 2, 4, 6
+def test_current_clowder_status(clowder):
+    clowder.current_clowder_status(test_seed = 42)
+    assert len(clowder.clowder) == 15
+    
+def test_update_arrival_new_mom(clowder):
+    clowder.update_move_in_date('Mom','1/1/2020')
+    clowder.current_clowder_status(test_seed = 42)
+    assert len(clowder.clowder) == 22
+    
+def test_adopt_newborns(clowder):
+    all_cats = clowder._get_clowder_summary()
+    newborns = list(all_cats[(all_cats['Age'] == 0)]['Name'])
+    for name in newborns:
+        clowder.adoption(name)
+    assert len(clowder.clowder) == 9
