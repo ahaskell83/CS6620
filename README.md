@@ -45,3 +45,10 @@ All project code is located in the "cat_code.py" file and consists of two classe
 A Clowder is a community structure of Cats. You can have an empty Clowder as all cats may be adopted (yay!). The more Cats that live in a clowder, the more likely that the cats will breed. A Cat gestation period is 65 days and all intact females at least one year old can and will have kittens. The number of kittens ranges from 1-9 per intact mom. Cats are identified with a name, date of birth, gender, whether or not they have been neutered or spayed, and their arrival date in the clowder (often the day they are born).
 
 All testing code is located in the "test_cat_code.py" file.
+
+
+## References:
+
+[Github Docs: Workflows](https://docs.github.com/en/actions/writing-workflows)
+
+https://github.com/devopselvis/github-actions-presentation/tree/main
