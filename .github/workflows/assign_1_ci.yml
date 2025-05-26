@@ -24,7 +24,7 @@ jobs:
       with:
         python-version: "3.13.2"
 
-# need to use pip list --format=freeze >requirements.txt to remove paths from requirements.txt file
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip

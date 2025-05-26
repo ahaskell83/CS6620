@@ -48,7 +48,7 @@ class Clowder():
         del self.clowder[name]
 
     def update_move_in_date(self, cat_name, new_date):
-
+        
         if type(new_date) == str:
             new_date = helper_date_parser(new_date)
         self.clowder[cat_name][1] =new_date
@@ -102,26 +102,3 @@ class Clowder():
         print(len(self.clowder))
         print(self.get_clowder_names())
 
-                
-            
-'''clowder = Clowder('test')
-
-def cat_family():
-    names = ["Mom","Dad","Fluffy","Shaggy","Sleek","rando"]
-    dobs = ['1/1/2009', '1/1/2020', '1/1/2025', '1/1/2025', '1/1/2025','1/1/2009']
-    male = [False, True, True, True, False,True]
-    intact = [True,True, True, True, True,True]
-    cats = []
-    for i in range (6):
-        cats.append(Cat(names[i],dobs[i],male[i],intact[i]))
-    return cats
-
-cats = cat_family()
-
-clowder.cat_family_moves_in(cats)
-
-clowder.update_move_in_date('rando','1/1/2020')
-clowder.update_move_in_date('Mom','1/1/2020')
-
-clowder.current_clowder_status(test_seed = 42)
-'''
