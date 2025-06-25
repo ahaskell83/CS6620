@@ -40,4 +40,4 @@ jobs:
 
     - name: Test with Pytest
       run: |
-        pytest -v
+        python -m pytest

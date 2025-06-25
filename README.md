@@ -1,3 +1,19 @@
+
+# CI/CD pipeline part 2
+
+
+
+
+References: 
+https://medium.com/@AlexanderObregon/how-to-build-a-simple-rest-api-with-flask-in-python-9adcd56cf3da
+
+https://flask.palletsprojects.com/en/stable/testing/
+
+https://www.geeksforgeeks.org/python/flask-creating-rest-apis/
+
+
+
+
 # CI/CD pipeline part 1
 
 When working on a software team, different programmers need to add features and fixes to the same code base without breaking anything. Typically the team maintains guarantees around consistency and quality in the form of automated testing. When a contributor adds or changes code to a branch in a repository, tests run and give feedback. This indicates that behavior under test did not change--at least, not in a way that caused test failures. Github commonly hosts software and offers a straightforward approach to creating automation pipelines, which they call "workflows".
@@ -17,8 +33,7 @@ When working on a software team, different programmers need to add features and 
  
 Note: When creating this file must omit local paths so need to use: 
 
-pip list --format=freeze >requirements.txt 
-
+pip list --format=freeze >requirements.txt
 
 ### Workflow that runs whenever a user changes either:
 [Github Workflow Code](.github/workflows/assign_1_ci.yml)
