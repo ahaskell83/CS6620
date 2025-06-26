@@ -25,7 +25,7 @@ When working on a software team, different programmers need to add features and 
 
 
 ### Relevant tests for that code:
-[Testing for Cat and Clowder Classes](test_cat_code.py)
+[Testing for Cat and Clowder Classes](tests/test_cat_code.py)
 
 ### Dependency management file(s):
 
@@ -44,7 +44,7 @@ pip list --format=freeze >requirements.txt
 Tests can be run manually via Github Actions.
 Click the "Run workflow" button shown below and "Run workflow" again in the menu that appears.
 
-![Github Workflow Screenshot](manual_workflow.png)
+![Github Workflow Screenshot](pics/manual_workflow.png)
 
 
 ### Instructions for running the code and scripts:
