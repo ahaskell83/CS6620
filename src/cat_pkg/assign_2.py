@@ -32,8 +32,6 @@ def return_post_clowder():
     clowders[clowder_name] = new_clowder[clowder_name]
     return jsonify(Clowder_Name = list(new_clowder.keys())[0], Clowder_Size = len(clowders)), 201
 
-# need to post new cats
-
 @app.put('/clowders/<string:clowder_name>/<string:cat_name>')
 def return_put_new_cat_info(clowder_name, cat_name):
     clowder_dict = clowders[clowder_name]
@@ -88,4 +86,4 @@ def return_adoption(clowder_name, cat_name):
    
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0') 
+    app.run(host="0.0.0.0",port=3000) 

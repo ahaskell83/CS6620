@@ -16,6 +16,8 @@ COPY ./src/cat_pkg ./src/cat_pkg
 
 COPY tests ./tests
 
-EXPOSE 5000
+EXPOSE 3000
 
-#CMD  ["sh", "-c", "python src/cat_pkg/assign_2.py"]
+ENV PYTHONUNBUFFERED=1
+
+CMD  ["sh", "-c", "-u", "python src/cat_pkg/assign_2.py"]
