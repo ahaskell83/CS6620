@@ -4,17 +4,20 @@
 Create a REST API with endpoints for GET, POST, PUT, and DELETE verbs, and tests for each endpoint. The endpoints should return appropriate status codes (e.g. 200 on successful GET), and tests should assert this behavior. Consider using test-driven development to write the software. 
 
 [Source Code for Flask Application](src/cat_pkg/assign_2.py)
+
 [Test Code for Flask Application](tests/test_assign_2.py)
 
 Create two Dockerfiles and corresponding shell scripts: 
 one will run the REST API until manually stopped:
 
 [Dockerfile for REST API Run](src/Dockerfile)
+
 [Shell script to Build and Run Container for REST API Run](src/cont_run_app.sh)
 
 the other will run the tests and exit with a zero status if the tests pass and a non-zero status if the tests fail:
 
 [Docker file for API Tests](tests/Dockerfile)
+
 [Shell Script to Build and Run Container for AP Tests](tests/cont_test_api.sh)
 
 Put the code, Dockerfiles, and shell scripts into a repository, and enable automatic and manual runs of the tests using a workflow. 
