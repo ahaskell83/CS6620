@@ -1,4 +1,4 @@
-name: Assignment 1 ci/cd
+name: CI/CD Pipeline
 
 on:
   workflow_dispatch:
