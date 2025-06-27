@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 
 WORKDIR /CS6620
 
-COPY ./ /CS6620doc
+COPY ./ /CS6620
 
 COPY ./src/ ./src/
 

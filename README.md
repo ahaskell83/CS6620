@@ -42,6 +42,8 @@ chmod +x src/cont_run_app.sh
 
 ./src/cont_run_app.sh
 
+The exposed port for the API is 3000, and the base url will need /clowders added to load.
+
 
 
 ## References: 
