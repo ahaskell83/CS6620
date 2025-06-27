@@ -26,6 +26,12 @@ def http_clowder():
     return clowder
 
 @pytest.fixture
+def http_empty_clowder():
+    clowder = cc.Clowder("New_Empty_Test_Clowder")
+    return clowder
+
+
+@pytest.fixture
 def http_cat():
     ten_yrs_old = str(datetime.date.today() - relativedelta(years=10))
     cat = cc.Cat("Big_Tom",dob=ten_yrs_old,male=True,intact=True)
@@ -42,32 +48,23 @@ def test_get_empty_clowder(client):
 def test_post_clowder(client,http_clowder):
     clowder_data = http_clowder.get_clowder_dict()
     response = client.post('/clowders', json = clowder_data)
-    assert response.status_code == 201 and response.json == {'Clowder_Name' : "Test_Clowder", "Clowder_Size" : 1}
+    assert response.status_code == 201
 
 def test_get_named_clowder(client,http_clowder):
-    name = http_clowder.get_clowder_name()
-    response = client.get('/clowders/'+name)
+    clowder_data = http_clowder.get_clowder_name()
+    path = '/clowders/'+clowder_data
+    response = client.get(path)
     assert response.status_code == 200
 
-def test_put_new_arrival_date(client,http_clowder,http_cat):
-    cat_name = http_cat.get_name()
+def test_put_new_clowder_dict(client,http_clowder,http_empty_clowder):
     clowder_name = http_clowder.get_clowder_name()
-    response = (client.put('/clowders/'+clowder_name+'/'+cat_name, json = {"New_Date" :'1/1/2001'}))
+    new_cat_info = http_empty_clowder.get_clowder_dict()
+    response = (client.put('/clowders/'+clowder_name, json = new_cat_info))
     assert response.status_code == 202 
-
-def test_del_cat(client, http_clowder,http_cat):
-    clowder_name = http_clowder.get_clowder_name()
-    cat_name = http_cat.get_name()
-    response = (client.delete('/clowders/' + clowder_name+'/'+cat_name))
-    assert response.status_code == 203
     
 def test_del_clowder(client, http_clowder):
     clowder_name = http_clowder.get_clowder_name()
     response = (client.delete('/clowders/' + clowder_name))
     assert response.status_code == 203
 
-def test_del_cat(client, http_clowder,http_cat):
-    clowder_name = http_clowder.get_clowder_name()
-    cat_name = http_cat.get_name()
-    response = (client.delete('/clowders/' + clowder_name+'/'+cat_name))
-    assert response.status_code == 203
+

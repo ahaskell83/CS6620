@@ -42,9 +42,31 @@ chmod +x src/cont_run_app.sh
 
 ./src/cont_run_app.sh
 
-The exposed port for the API is 3000, and the base url will need /clowders added to load.
+*The exposed port for the API is 3000.*
 
+Running a base GET for the App involves using curl or opening : http://127.0.0.1:3000/clowders
 
+*Note: you must add "/clowders" for basic GET*
+
+Terminal or website should display (if no previous POST or PUT commands were run):
+
+{
+  
+"Clowders": []
+
+}
+
+To test POST action run the curl command below and receive back the Clowder Name and Clowder size information
+
+![alt text](pics/image-1.png)
+
+To test PUT (in this case updating the dictionary associated with the previous POST clowder) run the curl command below and receive back the name of clowder which was updated ("Clowder_Updated") and the new information that was added ("New_Clowder_Info")
+
+![alt text](pics/image-2.png)
+
+To test DELETE run the curl command below and receive back the number of clowders remaining, and the clowder information removed (data, not name)
+
+![alt text](pics/image-3.png)
 
 ## References: 
 https://medium.com/@AlexanderObregon/how-to-build-a-simple-rest-api-with-flask-in-python-9adcd56cf3da
