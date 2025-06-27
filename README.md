@@ -24,7 +24,12 @@ Put the code, Dockerfiles, and shell scripts into a repository, and enable autom
 
 [Github Automatic Workflow for Testing](.github/workflows/assign_1_ci.yml)
 
+14 total tests should run:
+
+![Successful Test Run Output](pics/image.png)
+
 Tests can be run manually via Github Actions.
+
 Click the "Run workflow" button shown below and "Run workflow" again in the menu that appears.
 
 ![Github Workflow Screenshot](pics/manual_workflow.png)
