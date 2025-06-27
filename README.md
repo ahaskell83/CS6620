@@ -38,7 +38,7 @@
 
 chmod +x src/cont_run_app.sh
 
-and running that shell script from the commandline:
+#### and running that shell script from the commandline:
 
 ./src/cont_run_app.sh
 
