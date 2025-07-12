@@ -1,3 +1,38 @@
+# CI/CD pipeline (part 3) - Orchestration and CRUD
+
+### Add functionality to create, read, update, and destroy items in a DynamoDB table and an S3 bucket. 
+
+### Use Localstack to run a mock of AWS as part of your application stack. 
+
+### Create two compose files and corresponding shell scripts: one will run the stack until manually stopped, 
+
+### the other will run the tests and exit with a zero status if the tests pass and a non-zero status if the tests fail. 
+
+### Put all relevant files into a repository, and enable automatic and manual runs of the tests using a workflow. 
+
+### Include a README along with instructions for running the stack and tests
+
+- Sending a GET request with appropriate parameters returns expected JSON from the database
+- Sending a GET request that finds no results returns the appropriate response
+- Sending a GET request with no parameters returns the appropriate response
+- Sending a GET request with incorrect parameters returns the appropriate response
+- Sending a POST request results in the JSON body being stored as an item in the database, and an object in an S3 bucket
+- Sending a duplicate POST request returns the appropriate response
+- Sending a PUT request that targets an existing resource results in updates to the appropriate item in the database and object in the S3 bucket
+- Sending a PUT request with no valid target returns the appropriate response
+- Sending a DELETE request results in the appropriate item being removed from the database and object being removed from the S3 bucket
+- Sending a DELETE request with no valid target returns the appropriate response
+
+For each test, the database item and S3 object should match.
+
+
+
+### References:
+- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
+
+
+
+
 
 # CI/CD pipeline part 2
 
